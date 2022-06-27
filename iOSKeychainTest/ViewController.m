@@ -22,7 +22,7 @@
     BOOL result = [self insert:key :[UID dataUsingEncoding:NSUTF8StringEncoding]];
     NSLog(@"Insert Result: %@", [NSNumber numberWithBool:result]);
     
-    NSData *queryResult = [self find:key];
+    NSData *queryResult = [self query:key];
     if (queryResult == nil) {
         return;
     }
@@ -31,7 +31,7 @@
     result = [self remove:key];
     NSLog(@"Remove Result: %@", [NSNumber numberWithBool:result]);
     
-    NSData *query2Result = [self find:key];
+    NSData *query2Result = [self query:key];
     if (query2Result == nil) {
         return;
     }
@@ -63,7 +63,7 @@
     return (status == errSecSuccess);
 }
 
-- (NSData *)find: (NSString *)key {
+- (NSData *)query: (NSString *)key {
     
     NSMutableDictionary *dict = [self prepareDict:key];
     [dict setObject:(__bridge id)kSecMatchLimitOne forKey:(__bridge id)kSecMatchLimit];
